@@ -4,7 +4,6 @@
     $: date =['18 Sat','19 Sun','20 Mon','21 Tue','22 Wed']
     $: screen=[{screen:1,time:'11:00 AM'},{screen:1,time:'1:00 PM'},{screen:1,time:'3:00 PM'},{screen:2,time:'9:00 AM'},{screen:2,time:'11:00 PM'},{screen:2,time:'4:00 PM'},{screen:2,time:'8:00 PM'},{screen:3,time:'10:00 PM'},{screen:3,time:'12:00 PM'},{screen:3,time:'5:00 PM'}]
     $: chosen={date:'',time:'',screen:0}
-    export let step;
     const proceed = ()=>{
         if(chosen.date === '' || chosen.time ==='' || chosen.screen ===0){
             console.log("fill this first")

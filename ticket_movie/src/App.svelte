@@ -5,7 +5,6 @@
   import Footer from "./component/Footer.svelte"
   import Book from "./component/Book.svelte"
   let state=0;
-
 </script>
 <main>
   {#if state == 0}
