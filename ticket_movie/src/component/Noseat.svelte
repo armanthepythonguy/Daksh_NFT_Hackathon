@@ -1,17 +1,12 @@
 <script>
     import { each } from "svelte/internal";
     $:ticketsno=0
-    $:state=[]
-    for (let index = 0; index < state.length; index++) {
-        state[index]=0;
-    }
 </script>
 <main>
     <div class="screen">Sceen</div>
     <div class="layout">
         {#each Array(40) as s,i}
                 <div class="block" on:click={()=>{ticketsno+=1;}} class:active={s===1}></div>
-            {/if}
         {/each}            
     </div>
 </main>
