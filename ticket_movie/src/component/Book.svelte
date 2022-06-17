@@ -1,11 +1,14 @@
 <script>
     import Timing from "./Timing.svelte"
     import Noseat from "./Noseat.svelte"
+    import Pay from "./Pay.svelte"
     let navitems=['timing','seat selection','pay','ticket']
     $: done=['timing'];
     $: step=0;
     const stepchange =(e) => {
         step=e.detail
+        done=[...done,navitems[step]]
+
     }
 </script>
 <main>
@@ -21,7 +24,9 @@
     {#if step==0}
         <Timing {step} on:dis={stepchange}/>
     {:else if step==1}
-        <Noseat/>
+        <Noseat {step} on:dis1={stepchange}/>
+    {:else if step==2}
+        <Pay/>
     {/if}
 </main>
 <style>

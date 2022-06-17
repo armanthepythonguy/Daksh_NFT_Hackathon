@@ -1,9 +1,15 @@
 <script>
     import { each } from "svelte/internal";
+    import { createEventDispatcher } from "svelte/internal";
+    let dispatch=createEventDispatcher()
     $:ticketsno=0
+    export let step;
     const length = 40;
-    const filledArray = Array(length).fill(0);
+    const filledArray = Array(length).fill(0)
     export let chosen={date:'',time:'',screen:0}
+    const proceed = ()=>{
+            dispatch('dis1',2)
+        }
 </script>
 <main>
     <div class="screen">Sceen</div>
@@ -15,8 +21,23 @@
     <div class="details">
         No of Seats :{ticketsno}
     </div>
+    <div class="proceed" on:click={proceed}>
+        Next->
+    </div>
 </main>
 <style>
+    .proceed{
+        background-color: black;
+        color: wheat;
+        font-family: "roboto";
+        margin-left: 5vw;
+        margin-top: 2vh;
+        text-align: center;
+        font-size: 2rem;
+        width: 10vw;
+        border-radius: 17px;
+        cursor: pointer;
+    }
     .details{
         position: absolute;
         top: 15vh;
