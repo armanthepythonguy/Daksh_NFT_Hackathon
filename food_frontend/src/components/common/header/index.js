@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./header.css";
 
 const Header = () => {
   return (
     <div className="header max-width">
-      <img
-        src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
-        alt="Zomato-logo"
-        className="header-logo"
-      />
+      <Link to="/">
+        <img
+          src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
+          alt="Zomato-logo"
+          className="header-logo"
+        />
+      </Link>
       <div className="header-right">
         <div className="header-location-search-container">
           <div className="location-wrapper">
@@ -27,7 +30,7 @@ const Header = () => {
             />
           </div>
         </div>
-
+        <Link to="/checkout">
         <div className="profile-wrapper">
           <img
             src="https://b.zmtcdn.com/images/user_avatars/mug_2x.png?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A"
@@ -35,8 +38,8 @@ const Header = () => {
             alt="Profile"
           />
           <span className="header-username">Abdul</span>
-          <i className="fi fi-rr-angle-small-down absolute-center profile-options-icon"></i>
         </div>
+        </Link>
       </div>
     </div>
   );

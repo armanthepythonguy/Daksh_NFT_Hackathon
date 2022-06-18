@@ -1,0 +1,23 @@
+body{
+    /* background-color: aqua; */
+}
+.max-width{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.checkout{
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+.subtotal{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    height: 100px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid#ddd;
+    border-radius: 2px;
+}

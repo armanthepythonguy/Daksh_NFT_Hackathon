@@ -153,3 +153,24 @@
   background-color: var(--primary-bg);
   border: 1px solid var(--border-white);
 }
+.atc-btn{
+  border:  none;
+  background: var(--zomato-red);
+  cursor: pointer;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all ease 0.2s;
+}
+.atc-btn:hover{
+  color: #000;
+  background-color: #f7f7f7;
+}
+.remove{
+  padding: 10px;
+  cursor: pointer;
+  border:  none;
+  border-radius: 10px;
+  color: #000;
+  background-color: #f7f7f7;
+}
