@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./exploreCard.css";
-import Item from "../../productpage/product";
+
+if (localStorage.getItem("cart")) {
+  var cart = localStorage.getItem("cart").split(",")
+  var total_price = Number(localStorage.getItem("total_price"))
+}
+else {
+  var cart = [];
+  var total_price = 0;
+}
 
 const ExploreCard = ({ restaurant, i }) => {
+  const [AddToCart, setAddToCart] = useState(false);
   const unique_id = restaurant?.info?.resId;
+  // cart.indexOf(unique_id) === -1? setAddToCart(true): setAddToCart(false);
   const name = restaurant?.info?.name ?? "";
-  const coverImg =
-    restaurant?.info?.image?.url ?? restaurant?.info?.o2FeaturedImage?.url;
+  const coverImg = restaurant?.info?.image?.url ?? restaurant?.info?.o2FeaturedImage?.url;
   const deliveryTime = restaurant?.order?.deliveryTime;
   const rating = restaurant?.info?.rating?.rating_text;
   const approxPrice = restaurant?.info?.cfo?.text;
@@ -23,57 +32,69 @@ const ExploreCard = ({ restaurant, i }) => {
       : offers.length === 1
         ? offers[0].text
         : null;
-  const handleClick= ()=>Item(unique_id);
+  const handleClick = () => {
+    if (AddToCart) {
+      console.log(cart[cart.indexOf(unique_id)])
+      cart[cart.indexOf(unique_id)] = ''
+    }
+    else {
+      cart.push(unique_id)
+    }
+    total_price += Number(approxPrice.split(" ")[0].slice(1))
+    AddToCart ? setAddToCart(false) : setAddToCart(true)
+    localStorage.setItem("cart", cart)
+    console.log(localStorage.getItem("cart"))
+    localStorage.setItem("total_price", total_price)
+  };
   return (
-    // <a href={`/item/${unique_id}`} >
-      <div onClick={handleClick} className={`explore-card cur-po ${i < 3 ? "explore-card-first" : ""}`}>
-        <div className="explore-card-cover">
-          <img
-            src={coverImg}
-            className="explore-card-image"
-            alt={restaurant.info.name}
-          />
-          <div className="delivery-time">{deliveryTime}</div>
-          {proOff && <div className="pro-off">{proOff}</div>}
-          {goldOff && <div className="gold-off absolute-center">{goldOff}</div>}
-          {discount && <div className="discount absolute-center">{discount}</div>}
-        </div>
-        <div className="res-row">
-          <div className="res-name">{name}</div>
-          {rating && (
-            <div className="res-rating absolute-center">
-              {rating} <i className="fi fi-sr-star absolute-center" />
-            </div>
-          )}
-        </div>
-        <div className="res-row">
-          {cuisines.length && (
-            <div className="res-cuisine">
-              {cuisines.map((item, i) => (
-                <span className="res-cuisine-tag">
-                  {item}
-                  {i !== cuisines.length - 1 && ","}
-                </span>
-              ))}
-            </div>
-          )}
-          {approxPrice && <div className="res-price">{approxPrice}</div>}
-        </div>
-        {bottomContainers.length > 0 && (
-          <div>
-            <div className="card-separator"></div>
-            <div className="explore-bottom">
-              <img
-                src={bottomContainers[0]?.image?.url}
-                alt={bottomContainers[0]?.text}
-                style={{ height: "18px" }}
-              />
-              <div className="res-bottom-text">{bottomContainers[0]?.text}</div>
-            </div>
+    <div className={`explore-card cur-po ${i < 3 ? "explore-card-first" : ""}`}>
+      <div className="explore-card-cover">
+        <img
+          src={coverImg}
+          className="explore-card-image"
+          alt={restaurant.info.name}
+        />
+        <div className="delivery-time">{deliveryTime}</div>
+        {proOff && <div className="pro-off">{proOff}</div>}
+        {goldOff && <div className="gold-off absolute-center">{goldOff}</div>}
+        {discount && <div className="discount absolute-center">{discount}</div>}
+      </div>
+      <div className="res-row">
+        <div className="res-name">{name}</div>
+        {rating && (
+          <div className="res-rating absolute-center">
+            {rating} <i className="fi fi-sr-star absolute-center" />
           </div>
         )}
       </div>
-    // </a>
+      <div className="res-row">
+        {cuisines.length && (
+          <div className="res-cuisine">
+            {cuisines.map((item, i) => (
+              <span className="res-cuisine-tag">
+                {item}
+                {i !== cuisines.length - 1 && ","}
+              </span>
+            ))}
+          </div>
+        )}
+        {approxPrice && <div className="res-price">{approxPrice}</div>}
+      </div>
+      {bottomContainers.length > 0 && (
+        <div>
+          <div className="card-separator"></div>
+          <div className="explore-bottom">
+            <img
+              src={bottomContainers[0]?.image?.url}
+              alt={bottomContainers[0]?.text}
+              style={{ height: "18px" }}
+            />
+            <div className="res-bottom-text">{bottomContainers[0]?.text}</div>
+            <button className={AddToCart ? "remove" : "atc-btn"} onClick={handleClick}>{AddToCart ? "Remove" : "Add To Cart"}</button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
