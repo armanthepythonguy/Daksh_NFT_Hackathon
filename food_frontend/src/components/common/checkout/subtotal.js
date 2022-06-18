@@ -7,6 +7,7 @@ export default function Subtotal() {
     return (
       <div className='subtotal'>Total({localStorage.getItem("total_items")})
         <h2>₹{localStorage.getItem("total_price")}</h2>
+        <button className='btn'>Buy Now</button>
       </div>
     )
   }
